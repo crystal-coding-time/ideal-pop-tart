@@ -3,6 +3,7 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
+
 module.exports = () => {
   return {
     mode: 'development',
@@ -16,7 +17,7 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './src/index.html',
+        template: './index.html',
       }),
       new WebpackPwaManifest({
         name: 'My Progressive Web App',
@@ -24,16 +25,20 @@ module.exports = () => {
         description: 'This is my PWA!',
         background_color: '#ffffff',
         theme_color: '#007bff',
+        start_url: '/',
+				publicPath: '/',
+				fingerprints: false,
+				inject: true,
         icons: [
           {
-            src: path.resolve('src/assets/icon.png'),
+            src: path.resolve('./src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
           },
         ],
       }),
       new InjectManifest({
-        swSrc: './src/sw.js',
+        swSrc: './src-sw.js',
         swDest: 'sw.js',
       }),
     ],
