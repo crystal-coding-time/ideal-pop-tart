@@ -4,12 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start:dev": "nodemon server.js",
-    "start": "node server.js",
-    "server": "node server.js",
-    "build": "npm run client:build",
-    "install": "npm install",
-    "client": "cd client && npm start"
+    "start:dev": "concurrently \"cd client && npm run build\" \"cd server && npm run server\"",
+    "start": "cd server && node server-js",
+    "server": "cd server node server. js --ignore client",
+    "build": "cd client && pm run build",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "client": "cd client && pm start",
+    "heroku-prebuild": "npm install --dev"
   },
   "keywords": [],
   "author": "",
