@@ -1,36 +1,36 @@
 const butInstall = document.getElementById('buttonInstall');
 
-let deferredPrompt;
-
-// Logic for installing the PWA
-// Add an event handler to the `beforeinstallprompt` event
+// Add an event listener for the 'beforeinstallprompt' event
 window.addEventListener('beforeinstallprompt', (event) => {
-  // Prevent the default behavior
-  event.preventDefault();
-  // Save the prompt event for later use
-  deferredPrompt = event;
-  // Show the install button
-  butInstall.style.display = 'block';
+  // Store the event object for later use
+  window.deferredPrompt = event;
+
+  // Make the button visible by removing the 'hidden' class
+  butInstall.classList.toggle('hidden', false);
 });
 
-// Implement a click event handler on the `butInstall` element
+// Add an event listener for clicks on the install button
 butInstall.addEventListener('click', async () => {
-  // If there is a deferred prompt, show it
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    // Wait for the user to respond to the prompt
-    const choiceResult = await deferredPrompt.userChoice;
-    // Log the user's choice (e.g., whether they installed the app or not)
-    console.log(choiceResult.outcome);
-    // Set the deferred prompt to null to prevent it from showing again
-    deferredPrompt = null;
-    // Hide the install button
-    butInstall.style.display = 'none';
+  // Get the stored event object
+  const promptEvent = window.deferredPrompt;
+
+  // If there's no stored event, return
+  if (!promptEvent) {
+    return;
   }
+
+  // Show the install prompt
+  promptEvent.prompt();
+
+  // Reset the stored event object to null, since it can only be used once
+  window.deferredPrompt = null;
+
+  // Hide the install button by adding the 'hidden' class
+  butInstall.classList.toggle('hidden', true);
 });
 
-// Add an handler for the `appinstalled` event
+// Add an event listener for the 'appinstalled' event
 window.addEventListener('appinstalled', (event) => {
-  // Log that the app has been installed
-  console.log('Jate has been installed.');
+  // Clear the stored event object
+  window.deferredPrompt = null;
 });
