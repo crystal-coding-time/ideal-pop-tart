@@ -26,7 +26,7 @@ warmStrategyCache({
 
 // Asset caching implemented
 registerRoute(
-	({ request }) => request.destination === 'image',
+	({ request }) => ['style', 'script', 'worker'].includes(request.destination),
 	new CacheFirst({
 		cacheName: 'assets',
 		plugins: [
