@@ -14,7 +14,7 @@
 ## Description
 This is a PWA text editor that runs in the browser and can also also function offline. The app is a single-page application that features a number of data persistence techniques that serve as redundancy in case one of the options is not supported by the browser. 
 
-The application can be accessed [here](https://agile-reaches-04962.herokuapp.com/).
+The application can be accessed [here](https://afternoon-ridge-66760.herokuapp.com/).
 
 ## Usage
 A simple lightweight text editor that runs in the browser.
